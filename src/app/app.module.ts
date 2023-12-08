@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CustomerTableComponent } from "./customer-table/customer-table.component";
@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./shared/material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxLoadingButtonsModule } from "ngx-loading-buttons";
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [AppComponent, CustomerTableComponent],
   imports: [
@@ -22,8 +24,16 @@ import { NgxLoadingButtonsModule } from "ngx-loading-buttons";
     FormsModule,
     ReactiveFormsModule,
     NgxLoadingButtonsModule,
+    NgxSpinnerModule,
   ],
-  providers: [CustomerService],
+  providers: [
+    CustomerService,
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: "fill" },
+    },
+  ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
